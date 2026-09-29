@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Классификация изображений · ML-лаборатория{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container compact-container">
+        <p class="eyebrow">Сервис 03</p>
+        <h1>Классификация изображений</h1>
+        <p>MobileNetV3 сравнивает изображение с 1000 классами ImageNet и показывает три наиболее вероятных варианта.</p>
+    </div>
+</section>
+
+<div class="container content-grid">
+    <section class="panel" aria-labelledby="upload-title">
+        <h2 id="upload-title">Загрузите файл</h2>
+        <form method="post" enctype="multipart/form-data" data-busy-form>
+            {% csrf_token %}
+            {% if form.non_field_errors %}<div class="alert alert-error" role="alert">{{ form.non_field_errors }}</div>{% endif %}
+            <div class="field file-field {% if form.image.errors %}field-error{% endif %}">
+                {{ form.image.label_tag }}
+                {{ form.image }}
+                <small>{{ form.image.help_text }}</small>
+                {{ form.image.errors }}
+            </div>
+            <div class="image-preview" data-image-preview hidden>
+                <img alt="Предпросмотр выбранного изображения">
+            </div>
+            <button class="button button-primary" type="submit">Распознать изображение</button>
+            <span class="submit-status" role="status" aria-live="polite"></span>
+        </form>
+    </section>
+    <aside class="note">
+        <h2>Безопасная загрузка</h2>
+        <p>Сервер проверяет не только расширение, но и содержимое файла. Максимальный размер — 5 МБ.</p>
+        <p>Названия классов ImageNet выводятся на английском языке.</p>
+    </aside>
+</div>
+
+{% if current %}
+<section class="section" id="result" tabindex="-1" aria-labelledby="result-title">
+    <div class="container result-grid">
+        <div class="result-image"><img src="{{ current.image.url }}" alt="Загруженное изображение"></div>
+        <div>
+            <p class="eyebrow">Результат</p>
+            <h2 id="result-title">Наиболее вероятные классы</h2>
+            <div class="score-list">
+                {% for item in current.labels %}
+                {% widthratio item.score 100 100 as score_width %}
+                <div class="score-item">
+                    <div class="score-label"><span>{{ item.label }}</span><strong>{{ item.score }}%</strong></div>
+                    <div class="score-track" role="progressbar" aria-label="{{ item.label }}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ score_width }}"><span style="width: {{ score_width }}%"></span></div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% if history %}
+<section class="section section-muted" aria-labelledby="history-title">
+    <div class="container">
+        <h2 id="history-title">Последние изображения этой сессии</h2>
+        <div class="thumbnail-grid">
+            {% for item in history %}
+            <a href="?result={{ item.pk }}#result"><img src="{{ item.image.url }}" alt="Открыть результат для {{ item.image.name }}"></a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
+

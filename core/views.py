@@ -17,7 +17,7 @@ SERVICES = [
     {
         "title": 'Классификация изображений',
         "description": 'Загрузите изображение и получите три наиболее вероятных класса.',
-        "url_name": None,
+        "url_name": "image_classifier:index",
         "icon": '▧',
     },
 ]

@@ -25,6 +25,8 @@
 {% if active_page == 'emotions' %}aria-current="page"{% endif %}>Эмоции</a></li>
                     <li><a href="{% url 'dialog_bot:index' %}"
 {% if active_page == 'chat' %}aria-current="page"{% endif %}>Диалог</a></li>
+                    <li><a href="{% url 'image_classifier:index' %}"
+{% if active_page == 'images' %}aria-current="page"{% endif %}>Изображения</a></li>
                 </ul>
             </nav>
         </div>
