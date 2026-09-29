@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     "text_classifier",
+    "dialog_bot",
 ]
 
 MIDDLEWARE = [

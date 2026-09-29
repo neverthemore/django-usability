@@ -23,6 +23,8 @@
                     <li><a href="{% url 'core:home' %}" {% if active_page == 'home' %}aria-current="page"{% endif %}>Главная</a></li>
                     <li><a href="{% url 'text_classifier:index' %}"
 {% if active_page == 'emotions' %}aria-current="page"{% endif %}>Эмоции</a></li>
+                    <li><a href="{% url 'dialog_bot:index' %}"
+{% if active_page == 'chat' %}aria-current="page"{% endif %}>Диалог</a></li>
                 </ul>
             </nav>
         </div>

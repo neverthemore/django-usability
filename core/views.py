@@ -11,7 +11,7 @@ SERVICES = [
     {
         "title": 'Диалоговый бот',
         "description": 'Проведите короткий диалог с компактной локальной моделью.',
-        "url_name": None,
+        "url_name": "dialog_bot:index",
         "icon": '…',
     },
     {

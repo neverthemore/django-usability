@@ -5,4 +5,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("core.urls")),
     path("services/emotions/", include("text_classifier.urls")),
+    path("services/chat/", include("dialog_bot.urls")),
 ]
