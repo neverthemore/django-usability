@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Локальная ML-лаборатория{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container hero-grid">
+        <div>
+            <p class="eyebrow">Django · UX · машинное обучение</p>
+            <h1>Три понятных ML-сервиса в одном учебном проекте</h1>
+            <p class="hero-copy">Исследуйте возможности компактных моделей без облачных API. Ваши запросы и изображения остаются на этом компьютере.</p>
+            <a class="button button-primary" href="#services">Выбрать сервис</a>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+            <span class="orb orb-one"></span>
+            <span class="orb orb-two"></span>
+            <div class="terminal-card">
+                <span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span>
+                <p>local_model.ready()</p>
+                <strong>3 сервиса в одном проекте</strong>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="services" aria-labelledby="services-title">
+    <div class="container">
+        <p class="eyebrow">Практика</p>
+        <h2 id="services-title">Выберите задачу</h2>
+        <div class="service-grid">
+            {% for service in services %}
+            <article class="service-card">
+                <span class="service-icon" aria-hidden="true">{{ service.icon }}</span>
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.description }}</p>
+                {% if service.url_name %}
+                <a class="card-link" href="{% url service.url_name %}">Открыть сервис <span aria-hidden="true">→</span></a>
+                {% else %}
+                <span class="card-link card-link-disabled">Будет добавлен в следующей работе</span>
+                {% endif %}
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section section-muted" aria-labelledby="principles-title">
+    <div class="container compact-container">
+        <p class="eyebrow">Принципы проекта</p>
+        <h2 id="principles-title">Просто запустить, легко исследовать</h2>
+        <ul class="feature-list">
+            <li><strong>Локально.</strong> После первого скачивания весов интернет моделям не нужен.</li>
+            <li><strong>Прозрачно.</strong> Результат сопровождается вероятностями и пояснениями.</li>
+            <li><strong>Приватно.</strong> История разделена по сессиям браузера.</li>
+        </ul>
+    </div>
+</section>
+{% endblock %}
+
